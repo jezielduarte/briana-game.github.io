@@ -1,0 +1,40 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    background: url('background.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+canvas {
+    display: block;
+    margin: auto;
+    background: transparent;
+}
+
+#restartButton {
+	display: none;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	padding: 10px 20px;
+	font-size: 20px;
+	background-color: #FF1493;
+	color: #fff;
+	border: none;
+	cursor: pointer;
+}
+
+#startButton {
+	display: none;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	padding: 10px 20px;
+	font-size: 20px;
+	background-color: #FF1493;
+	color: #fff;
+	border: none;
+	cursor: pointer;
+}

@@ -7,8 +7,8 @@ canvas.height = window.innerHeight;
 const bird = {
     x: 50,
     y: canvas.height / 5,
-    width: 80,
-    height: 60,
+    width: 120,
+    height: 80,
     gravity: 0.3,
     lift: -8,
     velocity: 0,
@@ -78,7 +78,7 @@ function checkCollision() {
 function drawScore() {
     context.fillStyle = 'white';
     context.font = '24px Arial';
-    context.fillText(`Score: ${score}`, 10, 30);
+    context.fillText(`Meses: ${score}`, 10, 30);
 }
 
 function gameLoop() {
@@ -92,7 +92,7 @@ function gameLoop() {
     drawBird();
     updateBird();
 
-    if (flowers.length === 0 || flowers[flowers.length - 1].x < canvas.width - 200) {
+    if (flowers.length === 0 || flowers[flowers.length - 1].x < canvas.width - 300) {
         createFlower();
     }
 
@@ -100,7 +100,7 @@ function gameLoop() {
     updateFlowers();
     checkCollision();
     drawScore();
-
+    checkWin();
     requestAnimationFrame(gameLoop);
 }
 
@@ -109,6 +109,7 @@ function restartGame() {
     bird.y = canvas.height / 5;
 	flowers.length = 0;
 	gameOver = false;
+	score = 0;
     gameLoop();
     hideRestartButton();
 }
@@ -124,6 +125,13 @@ function hideRestartButton() {
 function startGame() {
     document.getElementById('startButton').style.display = 'none';
     gameLoop();
+}
+
+function checkWin(){
+    if(score == 3){
+        document.getElementById('prizeContainer').style.display = 'block';
+        gameOver = true;
+    }
 }
 
 canvas.addEventListener('click', () => {

@@ -7,7 +7,28 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-	<button id="restartButton" onclick="restartGame()" style="display: none;">Tente Novamente</button>
+    <div id="prizeContainer" style="display: none;">
+        <div id="prizeMessage">
+            <h1>Parabéns, Você Venceu!</h1>
+            <p>
+                Agora venha comemorar meu primeiro aninho! Quero muito que vocês venham celebrar comigo. 
+                A festa será no dia 10/08/2024, e vai ter bolo, docinhos e muitas brincadeiras!
+            </p>
+            <p>
+                Endereço
+            </p>
+            <p>
+                <b class="address">Rua do parque 333, AP48 BLOCO 5, Bairro Cambeba, Fortaleza, Ceará</b>
+            </p>
+            <p>
+                Espero vocês lá!
+                
+                Beijinhos,
+                Briana 💕
+            </p>
+        </div>
+    </div>    
+	<button id="restartButton" onclick="restartGame()" style="display: none;">Jogar Novamente</button>
 	<button id="startButton" onclick="startGame()" style="display: block;">Iniciar Jogo</button>
 	<canvas id="gameCanvas"></canvas>
 </body>

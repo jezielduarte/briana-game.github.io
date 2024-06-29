@@ -112,6 +112,7 @@ function restartGame() {
 	score = 0;
     gameLoop();
     hideRestartButton();
+    document.getElementById('prizeContainer').style.display = 'none';
 }
 
 function showRestartButton() {
@@ -128,7 +129,7 @@ function startGame() {
 }
 
 function checkWin(){
-    if(score == 3){
+    if(score == 12){
         document.getElementById('prizeContainer').style.display = 'block';
         gameOver = true;
     }

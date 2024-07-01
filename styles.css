@@ -39,7 +39,7 @@ canvas {
 	cursor: pointer;
 }
 
-#prizeContainer {
+.prizeContainer {
 	display: none;
 	position: absolute;
 	top: 50%;

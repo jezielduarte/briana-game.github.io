@@ -58,6 +58,7 @@ function updateFlowers() {
         if (flower.x + flower.width < 0) {
             flowers.splice(index, 1);
             score++;
+            playBeepPass();
         }
     });
 }
@@ -71,6 +72,7 @@ function checkCollision() {
             bird.y + bird.height > flower.y
         ) {
             gameOver = true;
+            playQuemQuem();
         }
     });
 }
@@ -105,7 +107,7 @@ function gameLoop() {
 }
 
 function restartGame() {
-
+    playIntroMusic();
     bird.y = canvas.height / 5;
 	flowers.length = 0;
 	gameOver = false;
@@ -124,7 +126,9 @@ function hideRestartButton() {
 }
 
 function startGame() {
+    playIntroMusic();
     document.getElementById('startButton').style.display = 'none';
+    document.getElementById('start-message').style.display = 'none';
     gameLoop();
 }
 
@@ -137,8 +141,139 @@ function checkWin(){
 
 canvas.addEventListener('click', () => {
     bird.velocity = bird.lift;
+    playBeep();
 });
 
 // birdImage.onload = () => {
     // gameLoop();
 // };
+
+function playBeep() {
+    // Create a new audio context
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    
+    // Create an oscillator node
+    const oscillator = audioCtx.createOscillator();
+    
+    // Set the oscillator frequency to 440 Hz (A4 note)
+    oscillator.frequency.setValueAtTime(440, audioCtx.currentTime); // 440 Hz is the frequency of A4
+    
+    // Set the oscillator type to sine wave
+    oscillator.type = 'triangle';
+    
+    // Create a gain node to control the volume
+    const gainNode = audioCtx.createGain();
+    
+    // Set the gain value to a reasonable level
+    gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+    
+    // Connect the oscillator to the gain node
+    oscillator.connect(gainNode);
+    
+    // Connect the gain node to the audio context's destination (i.e., the speakers)
+    gainNode.connect(audioCtx.destination);
+    
+    // Start the oscillator
+    oscillator.start();
+    
+    // Stop the oscillator after 0.5 seconds
+    oscillator.stop(audioCtx.currentTime + 0.3);
+}
+
+function playBeepPass() {
+    // Create a new audio context
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    
+    // Create an oscillator node
+    const oscillator = audioCtx.createOscillator();
+    
+    // Set the oscillator frequency to 440 Hz (A4 note)
+    oscillator.frequency.setValueAtTime(440, audioCtx.currentTime); // 440 Hz is the frequency of A4
+    
+    // Set the oscillator type to sine wave
+    oscillator.type = 'sawtooth';
+    
+    // Create a gain node to control the volume
+    const gainNode = audioCtx.createGain();
+    
+    // Set the gain value to a reasonable level
+    gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+    
+    // Connect the oscillator to the gain node
+    oscillator.connect(gainNode);
+    
+    // Connect the gain node to the audio context's destination (i.e., the speakers)
+    gainNode.connect(audioCtx.destination);
+    
+    // Start the oscillator
+    oscillator.start();
+    
+    // Stop the oscillator after 0.5 seconds
+    oscillator.stop(audioCtx.currentTime + 0.2);
+}
+
+function playIntroMusic() {
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    
+    // Frequencies for a simple melody (C4, D4, E4, G4, A4)
+    const notes = [
+        { frequency: 261.63, duration: 0.4 },  // C4
+        { frequency: 293.66, duration: 0.4 },  // D4
+        { frequency: 329.63, duration: 0.4 },  // E4
+        { frequency: 392.00, duration: 0.4 },  // G4
+        { frequency: 440.00, duration: 0.4 }   // A4
+    ];
+
+    let currentTime = audioCtx.currentTime;
+
+    notes.forEach(note => {
+        const oscillator = audioCtx.createOscillator();
+        const gainNode = audioCtx.createGain();
+        
+        oscillator.frequency.setValueAtTime(note.frequency, currentTime);
+        oscillator.type = 'sine';
+        gainNode.gain.setValueAtTime(0.1, currentTime);
+
+        oscillator.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+
+        oscillator.start(currentTime);
+        oscillator.stop(currentTime + note.duration);
+
+        // Schedule the next note
+        currentTime += note.duration + 0.1;  // Adding a small gap between notes
+    });
+}
+
+function playQuemQuem() {
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    
+    // Frequencies and durations for the "quem quem" sound
+    const notes = [
+        { frequency: 220.00, duration: 0.2 },  // A3
+        { frequency: 220.00, duration: 0.2 },  // A3
+        { frequency: 220.00, duration: 0.2 },  // A3
+        { frequency: 220.00, duration: 0.2 },  // A3
+        { frequency: 220.00, duration: 0.2 }   // A3
+    ];
+
+    let currentTime = audioCtx.currentTime;
+
+    notes.forEach(note => {
+        const oscillator = audioCtx.createOscillator();
+        const gainNode = audioCtx.createGain();
+        
+        oscillator.frequency.setValueAtTime(note.frequency, currentTime);
+        oscillator.type = 'sine';
+        gainNode.gain.setValueAtTime(0.1, currentTime);
+
+        oscillator.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+
+        oscillator.start(currentTime);
+        oscillator.stop(currentTime + note.duration);
+
+        // Schedule the next note with a slight pause
+        currentTime += note.duration + 0.1;  // Adding a small gap between notes
+    });
+}

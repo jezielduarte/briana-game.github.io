@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="prizeContainer" style="display: none;">
+    <div id="prizeContainer" class="prizeContainer" style="display: none;">
         <div id="prizeMessage">
             <h1>Parabéns, Você Venceu!</h1>
             <p>
@@ -29,7 +29,18 @@
         </div>
     </div>    
 	<button id="restartButton" onclick="restartGame()" style="display: none;">Jogar Novamente</button>
-	<button id="startButton" onclick="startGame()" style="display: block;">Iniciar Jogo</button>
+    <div id="start-message" class="prizeContainer" style="display: block;">
+        <div id="prizeMessage">
+            <h1>Bem vindo a festinha da Briana</h1>
+            <p>
+                Ajude a Briana passar pelos 12 meses para chegar ao endereço. 
+            </p>
+            <p>
+                Clique na tela para saltar e desviar das flores.
+            </p>
+        </div>
+    </div>   
+    <button id="startButton" onclick="startGame()" style="display: block;">Iniciar Jogo</button>
 	<canvas id="gameCanvas"></canvas>
 </body>
 	<script src="script.js"></script>

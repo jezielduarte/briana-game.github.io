@@ -135,6 +135,7 @@ function checkWin(){
     if(score == 12){
         document.getElementById('prizeContainer').style.display = 'block';
         gameOver = true;
+        playHappyMusic();
     }
 }
 

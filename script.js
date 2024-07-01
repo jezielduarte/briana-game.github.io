@@ -140,7 +140,7 @@ function checkWin(){
 
 canvas.addEventListener('click', () => {
     bird.velocity = bird.lift;
-    playHappyMusic();
+    playBeep();
 });
 
 // birdImage.onload = () => {

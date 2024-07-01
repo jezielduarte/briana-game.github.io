@@ -58,7 +58,6 @@ function updateFlowers() {
         if (flower.x + flower.width < 0) {
             flowers.splice(index, 1);
             score++;
-            playBeepPass();
         }
     });
 }
@@ -72,7 +71,7 @@ function checkCollision() {
             bird.y + bird.height > flower.y
         ) {
             gameOver = true;
-            playQuemQuem();
+            playBeepPass();
         }
     });
 }
@@ -141,7 +140,7 @@ function checkWin(){
 
 canvas.addEventListener('click', () => {
     bird.velocity = bird.lift;
-    playBeep();
+    playHappyMusic();
 });
 
 // birdImage.onload = () => {
@@ -177,7 +176,7 @@ function playBeep() {
     oscillator.start();
     
     // Stop the oscillator after 0.5 seconds
-    oscillator.stop(audioCtx.currentTime + 0.3);
+    oscillator.stop(audioCtx.currentTime + 0.1);
 }
 
 function playBeepPass() {
@@ -245,16 +244,36 @@ function playIntroMusic() {
     });
 }
 
-function playQuemQuem() {
+function playHappyMusic() {
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     
-    // Frequencies and durations for the "quem quem" sound
+    // Frequencies and durations for a happy melody
     const notes = [
-        { frequency: 220.00, duration: 0.2 },  // A3
-        { frequency: 220.00, duration: 0.2 },  // A3
-        { frequency: 220.00, duration: 0.2 },  // A3
-        { frequency: 220.00, duration: 0.2 },  // A3
-        { frequency: 220.00, duration: 0.2 }   // A3
+        { frequency: 264, duration: 0.2 },  // C4
+        { frequency: 264, duration: 0.2 },  // C4
+        { frequency: 297, duration: 0.4 },  // D4
+        { frequency: 264, duration: 0.4 },  // C4
+        { frequency: 352, duration: 0.4 },  // F4
+        { frequency: 330, duration: 0.8 },  // E4
+        { frequency: 264, duration: 0.2 },  // C4
+        { frequency: 264, duration: 0.2 },  // C4
+        { frequency: 297, duration: 0.4 },  // D4
+        { frequency: 264, duration: 0.4 },  // C4
+        { frequency: 396, duration: 0.4 },  // G4
+        { frequency: 352, duration: 0.8 },  // F4
+        { frequency: 264, duration: 0.2 },  // C4
+        { frequency: 264, duration: 0.2 },  // C4
+        { frequency: 528, duration: 0.4 },  // C5
+        { frequency: 440, duration: 0.4 },  // A4
+        { frequency: 352, duration: 0.4 },  // F4
+        { frequency: 330, duration: 0.4 },  // E4
+        { frequency: 297, duration: 0.4 },  // D4
+        { frequency: 466, duration: 0.2 },  // A#4
+        { frequency: 466, duration: 0.2 },  // A#4
+        { frequency: 440, duration: 0.4 },  // A4
+        { frequency: 352, duration: 0.4 },  // F4
+        { frequency: 396, duration: 0.4 },  // G4
+        { frequency: 352, duration: 1.6 }   // F4
     ];
 
     let currentTime = audioCtx.currentTime;
@@ -264,7 +283,7 @@ function playQuemQuem() {
         const gainNode = audioCtx.createGain();
         
         oscillator.frequency.setValueAtTime(note.frequency, currentTime);
-        oscillator.type = 'sine';
+        oscillator.type = 'sine';  // You can experiment with 'square', 'sawtooth', 'triangle'
         gainNode.gain.setValueAtTime(0.1, currentTime);
 
         oscillator.connect(gainNode);
